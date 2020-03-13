@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Libri</title>
+    </head>
+
+    <body>
+        <h1>Modifica Libro</h1>
+
+        <p><a href="/libri">Libri</a></p>
+
+        <form action="/edit-libro" method="POST">
+            <input type="hidden" name="id" value="<%= libro.Id %>">
+            <input type="text" name="titolo" placeholder="Titolo" value="<%= libro.Titolo %>">
+            <select name="autore">
+                    <option value="0">---</option>
+                <% autori.forEach(function (autore) { %>
+                    <option value="<%= autore.Id %>" <% if (autore.Id == libro.Id_Autore) { %>selected<% } %>><%= autore.Cognome %> <%= autore.Nome %></option>
+                <% }); %>
+            </select>
+            <input type="submit" value="Aggiorna Libro">
+        </form>
+    </body>
+</html>

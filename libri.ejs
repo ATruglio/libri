@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Libri</title>
+    </head>
+
+    <body>
+        <h1>Libri</h1>
+
+        <p><a href="/">Home</a></p>
+
+        <form action="/nuovo-libro" method="POST">
+            <input type="text" name="titolo" placeholder="Titolo">
+            <select name="autore">
+                <option value="0">---</option>
+                <% Autori.forEach(function (autore) { %>
+                    <option value="<%= autore.Id %>"><%= autore.Cognome %> <%= autore.Nome %></option>
+                <% }); %>
+            </select>
+            <input type="submit" value="Inserisci Nuovo Autore">
+        </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titolo</th>
+                <th>Autore</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% Libri.forEach(function (libro) { %>
+                <tr>
+                    <td><%= libro.Id %></td>
+                    <td><%= libro.Titolo %></td>
+                    <td><%= libro.Cognome %></td>
+                    <td><a href="/libro/<%= libro.Id %>/edit">Edit</a></td>
+                    <td><form action="/delete-libro" method="POST"><input type="hidden" name="id" value="<%= libro.Id %>"><input type="submit" value="&times;"></form></td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </body>
+</html>
